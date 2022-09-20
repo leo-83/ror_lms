@@ -1,2 +1,4 @@
 class Course < ApplicationRecord
-end
+
+    validates :title, :desc, :ctype, presence: true
+  end
