@@ -1,6 +1,6 @@
 class Api::EnrollmentsController < ApplicationController
   before_action :set_course
-  before_action :set_enrollment, except: [:index, :create]
+  before_action :set_enrollment, except: [:index, :create, :unenrolledUsers]
 
   def index
     render json: @course.enrollments
@@ -30,6 +30,11 @@ class Api::EnrollmentsController < ApplicationController
   def destroy
     @enrollment.destroy
     render json: { message: 'Unenrolled' }
+  end
+
+  def unenrolledUsers
+    @users = User.all - @course.users 
+    render json: @users
   end
 
   private 

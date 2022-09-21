@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const CourseShow = ({}) => {
   const { id } = useParams()
@@ -22,9 +23,11 @@ const CourseShow = ({}) => {
       <Button variant="warning">
         Edit
       </Button>
-      <Button variant="success">
-        Enrollments
-      </Button>
+      <Link to={`/${id}/enrollments`}>
+        <Button variant="success">
+          Enrollments
+        </Button>
+      </Link>
       <Button variant="danger">
         Delete
       </Button>
