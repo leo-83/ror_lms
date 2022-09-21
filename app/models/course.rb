@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
-
-    validates :title, :desc, :ctype, presence: true
-  end
+  has_many :enrollments, dependent: :destroy
+  has_many :users, through: :enrollments
+  
+  validates :title, :desc, :ctype, presence: true
+end

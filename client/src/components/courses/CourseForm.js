@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button } from 'react-bootstrap';
 
-const CourseForm = ({ addCourse, setAdd }) => {
+const CourseForm = ({ addCourse, setAdd, id, title, desc, ctype, updateCourse, setEdit }) => {
   const [course, setCourse] = useState({ title: '', desc: '', ctype: 'Other' })
+
+  useEffect( () => {
+    if (id) {
+      setCourse({ title, desc, ctype })
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addCourse(course)
-    setAdd(false)
+    if (id) {
+      updateCourse(id, course)
+      setEdit(false)
+    } else {
+      addCourse(course)
+      setAdd(false)
+    }
     setCourse({ title: '', desc: '', ctype: 'Other' })
   }
 

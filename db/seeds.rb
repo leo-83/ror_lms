@@ -3,16 +3,21 @@ User.delete_all
 Course.delete_all
 
 5.times do
-  User.create(
+  user = User.create(
     first_name: Faker::FunnyName.name,
     last_name: Faker::FunnyName.name,
     img: Faker::Avatar.image
   )
 
-  Course.create(
+  course = Course.create(
     title: Faker::Computer.os,
     desc: Faker::Lorem.sentence,
     ctype: Faker::Science.science, 
+  )
+
+  Enrollment.create(
+    user_id: user.id,
+    course_id: course.id
   )
 
 end
@@ -31,3 +36,5 @@ Course.all.each do |c|
   puts "#{c.ctype}" 
   puts "--------" 
 end
+
+puts "Enrollment Count #{Enrollment.all.count}"

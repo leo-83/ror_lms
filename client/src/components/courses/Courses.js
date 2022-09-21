@@ -20,6 +20,26 @@ const Courses = () => {
       .catch( err => console.log(err))
   }
 
+  const updateCourse = (id, course) => {
+    axios.put(`/api/courses/${id}`, { course })
+      .then( res => {
+        const newUpdatedCourses = courses.map( c => {
+          if (c.id === id) {
+            return res.data
+          }
+          return c
+        })
+        setCourses(newUpdatedCourses)
+      })
+      .catch( err => console.log(err))
+  }
+
+  const deleteCourse = (id) => {
+    axios.delete(`/api/courses/${id}`)
+      .then( res => setCourses( courses.filter( c => c.id !== id )))
+      .catch( err => console.log(err)) 
+  }
+
   return (
     <>
       <Button onClick={() => setAdd(true)}>
