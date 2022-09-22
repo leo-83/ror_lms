@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { EnrollmentConsumer } from '../../providers/EnrollmentProvider';
 
-const EnrollForm = ({ addEnroll, setAdd, unenrolledUsers, id, user_id, updateEnroll, setEdit }) => {
+const EnrollForm = ({ addEnroll, setAdd, unenrolledUsers, id, user_id, updateEnroll, setEdit, courseId }) => {
   const [enrollment, setEnrollment] = useState({ user_id: 0 })
 
   useEffect( () => {
@@ -13,10 +14,10 @@ const EnrollForm = ({ addEnroll, setAdd, unenrolledUsers, id, user_id, updateEnr
   const handleSubmit = (e) => {
     e.preventDefault()
     if (id) {
-      updateEnroll(id, enrollment)
+      updateEnroll(courseId, id, enrollment)
       setEdit(false)
     } else {
-      addEnroll(enrollment)
+      addEnroll(courseId, enrollment)
       setAdd(false)
     }
     setEnrollment({ user_id: 0 })
@@ -49,4 +50,10 @@ const EnrollForm = ({ addEnroll, setAdd, unenrolledUsers, id, user_id, updateEnr
   )
 }
 
-export default EnrollForm;
+const ConnectedEnrollForm = (props) => (
+  <EnrollmentConsumer>
+    { value => <EnrollForm {...value} {...props} /> }
+  </EnrollmentConsumer>
+)
+
+export default ConnectedEnrollForm;

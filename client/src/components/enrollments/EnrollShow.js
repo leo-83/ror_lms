@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ListGroup, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import EnrollForm from './EnrollForm';
+import { EnrollmentConsumer } from '../../providers/EnrollmentProvider';
 
 const EnrollShow = ({ id, course_id, user_id, updateEnroll, unenrolledUsers, deleteEnroll }) => {
   const [user, setUser] = useState({ first_name: '' , last_name: '' })
@@ -27,6 +28,7 @@ const EnrollShow = ({ id, course_id, user_id, updateEnroll, unenrolledUsers, del
             updateEnroll={updateEnroll}
             setEdit={setEdit}
             unenrolledUsers={unenrolledUsers}
+            courseId={courseId}
           />
           <Button 
             variant='warning'
@@ -46,7 +48,7 @@ const EnrollShow = ({ id, course_id, user_id, updateEnroll, unenrolledUsers, del
           </Button>
           <Button 
             variant='danger'
-            onClick={() => deleteEnroll(id)}
+            onClick={() => deleteEnroll(courseId, id)}
           >
             Delete
           </Button>
@@ -56,4 +58,10 @@ const EnrollShow = ({ id, course_id, user_id, updateEnroll, unenrolledUsers, del
   )
 }
 
-export default EnrollShow;
+const ConnectedEnrollShow = (props) => (
+  <EnrollmentConsumer>
+    { value => <EnrollShow {...value} {...props} />}
+  </EnrollmentConsumer>
+)
+
+export default ConnectedEnrollShow;
