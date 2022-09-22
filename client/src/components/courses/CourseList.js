@@ -5,7 +5,7 @@ const CourseList = ({ courses }) => (
   <Container>
     <Row md='4' sm='12'>
       { courses.map( c =>
-        <Col>
+        <Col key={c.id}>
           <Card style={{ width: '10rem' }}>
             <Card.Body>
               <Card.Title>{c.title}</Card.Title>

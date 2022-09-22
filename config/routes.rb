@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get '/unenrolled', to: 'enrollments#unenrolledUsers'
     end
 
+    get '/:id/courseUsers', to: 'courses#courseUsers'
+    get '/:id/userCourses', to: 'users#userCourses'
 
   end
   

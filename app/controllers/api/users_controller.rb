@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :userCourses]
 
   def index
     render json: User.all 
@@ -29,6 +29,10 @@ class Api::UsersController < ApplicationController
   def destroy
     @user.destroy 
     render json: { message: 'User deleted'}
+  end
+
+  def userCourses
+    render json: @user.courses
   end
 
   private 

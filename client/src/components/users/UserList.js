@@ -5,7 +5,7 @@ const UserList = ({ users }) => (
   <>
     <ListGroup variant='flush'>
       { users.map( u =>
-        <ListGroup.Item>
+        <ListGroup.Item key={u.id}>
           {u.first_name} {u.last_name}
           <Link to={`/users/${u.id}`}>
             <Button>Show</Button>
