@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import UserProvider from './providers/UserProvider';
+import CourseProvider from './providers/CourseProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <CourseProvider>
+          <App />
+        </CourseProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
